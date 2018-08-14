@@ -9,14 +9,14 @@ class CMDBUserForm(forms.Form):
             'class': 'form-control',
             'required': "",
             'minlength': 2,
-            'maxlength': 10,
+            'maxlength': 32,
         }))
     password = forms.CharField(max_length=32, label='用户密码', widget=forms.PasswordInput(
         attrs={
             'class': 'form-control',
             'required': "",
-            'minlength': 2,
-            'maxlength': 10,
+            'minlength': 6,
+            'maxlength': 32,
         }))
     nickname = forms.CharField(max_length=32, label='用户姓名', widget=forms.TextInput(
         attrs={

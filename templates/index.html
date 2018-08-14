@@ -4,6 +4,10 @@
     小霸王CMDB系统-首页
 {% endblock %}
 
+{% block style %}
+    <link rel="stylesheet" href="/static/css/register.css">
+{% endblock %}
+
 {% block label %}
     <div class="container-fluid">
         <div class="col-md-11">
@@ -31,8 +35,10 @@
                     </h4>
                 </div>
 
-                <form method="post" id="register_Form">
+                <form method="post" id="register_Form" enctype="multipart/form-data">
+
                     <div class="modal-body">
+                    {% csrf_token %}
                         {% for form in forms %}
                             <div class="form-group input-group">
                             <span class="input-group-addon">
@@ -44,10 +50,13 @@
                     </div>
 
                     <div class="modal-footer">
+                        <button type="reset" class="btn btn-default">
+                            重置
+                        </button>
                         <button type="button" class="btn btn-default" data-dismiss="modal">
                             取消
                         </button>
-                        <button type="button" class="btn btn-primary">
+                        <button type="submit" class="btn btn-primary">
                             注册
                         </button>
                     </div>
@@ -62,13 +71,6 @@
     <script type="text/javascript" src="../static/vendor/jquery/jquery.validate.min.js"></script>
     <script type="text/javascript" src="../static/vendor/jquery/messages_zh.min.js"></script>
     <script>
-        $.validator.setDefaults(
-            {
-                submitHandler: function () {
-                    alert("你提交试试？")
-                }
-            }
-        );
         $().ready(
             function () {
                 $("#register_Form").validate(
@@ -76,30 +78,30 @@
                         rules: {
                             id_username: {
                                 required: true,
-                                maxlength: 10,
-                                minLength: 2,
+                                maxlength: 32,
+                                minlength: 2
                             },
                             id_password: {
                                 required: true,
-                                maxlength: 10,
-                                minLength: 2,
+                                maxlength: 32,
+                                minlength: 2
                             },
                             id_nickname: {
                                 required: true,
-                                maxlength: 10,
-                                minLength: 2,
+                                maxlength: 32,
+                                minlength: 2
                             },
                             id_phone: {
-                                required: true,
+                                required: true
                             },
                             id_email: {
-                                email: true,
-                            },
+                                email: true
+                            }
                         },
-                        message: {
+                        messages: {
                             id_username: {
-                                requeired: "用户名不能为空",
-                                maxlength: "用户名不能大于10位",
+                                required: "用户名不能为空",
+                                maxlength: "用户名不能大于6位",
                                 minlength: "用户名不能小于2位"
                             },
                             id_password: {
@@ -118,7 +120,9 @@
                             id_email: {
                                 email: "邮件需要符合格式"
                             }
-
+                        },
+                        submitHandler: function (form) {
+                            form.submit()
                         }
                     }
                 )
