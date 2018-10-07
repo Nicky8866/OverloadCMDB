@@ -1,0 +1,99 @@
+{% extends "blank.html" %}
+
+{% block title %}
+    VUE示例
+{% endblock %}
+
+{% block label %}
+    VUE示例
+{% endblock %}
+
+{% block style %}
+    <script src="/static/vendor/jquery/jquery.min.js"></script>
+    <script src="/static/js/vue.js"></script>
+{% endblock %}
+
+{% block content %}
+    {% verbatim myblock %}
+        <div id="example">
+            <p>
+                <span>基本的文本绑定：</span>
+                <span>hello，I am {{ name }}</span>
+            </p>
+            <p>
+                <span>基本的循环绑定：</span>
+            <ul>
+                <li v-for="p in page">{{ p }}</li>
+            </ul>
+            </p>
+
+            <p>
+                <span>带有属性和映射的循环绑定：</span>
+            <ul>
+                <li v-for="data in message">
+                    <a v-bind:href="data.name" v-bind:class="[data.name,data.cla]">
+                        {{ data.name }}</a>
+                </li>
+            </ul>
+            </p>
+            <p>
+                <span>基于事件的绑定：</span>
+                <button v-on:click="sample_method">按我呀！</button>
+            </p>
+            <p>
+                <span>基于ajax的传参绑定:</span>
+            <ul>
+                <ul>
+                    <li v-for="p in page">
+                        <a v-on:click="ajax_method(p)">
+                            {{ p }}
+                        </a>
+                    </li>
+                </ul>
+            </ul>
+            </p>
+
+        </div>
+    {% endverbatim myblock %}
+    <script>
+        new Vue(
+            {
+                el: "#example",
+                data: {
+                    name: "Nicky",
+                    page: [1, 2, 3, 4, 5, 6, 7],
+                    message: [
+                        {name: "Nicky", id: 1, cla: "test1"},
+                        {name: "mk", id: 2, cla: "test2"},
+                        {name: "cd", id: 3, cla: "test3"},
+                        {name: "for", id: 4, cla: "test4"},
+                        {name: "rm", id: 5, cla: "test5"}
+
+                    ],
+                    ajaxData: ""
+                },
+                methods: {
+                    sample_method: function () {
+                        alert("You clicked me!")
+                    },
+                    ajax_method: function (page) {
+                        $.ajax(
+                            {
+                                url: "/server/ajax_server/" + page,
+                                data: "",
+                                type: "get",
+                                success: function (data) {
+                                    console.log(data["page_data"])
+                                },
+                                error: function (error) {
+                                    console.log(error)
+                                }
+                            }
+                        )
+                    }
+                }
+            }
+        )
+    </script>
+
+{% endblock %}

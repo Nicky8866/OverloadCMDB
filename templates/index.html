@@ -36,9 +36,8 @@
                 </div>
 
                 <form method="post" id="register_Form" enctype="multipart/form-data">
-
-                    <div class="modal-body">
                     {% csrf_token %}
+                    <div class="modal-body">
                         {% for form in forms %}
                             <div class="form-group input-group">
                             <span class="input-group-addon">
@@ -122,7 +121,38 @@
                             }
                         },
                         submitHandler: function (form) {
-                            form.submit()
+                            //form.submit()
+                            var formData = new FormData();
+                            data = $("#register_Form").serializeArray();
+                            for (var d in data) {
+                                key = data[d]["name"];
+                                value = data[d]["value"];
+                                formData.append(key, value)
+                                //console.log(data[d])
+                            }
+                            var img = $("#id_photo")[0].files[0];
+                            formData.append("photo", img);
+                            //取csrf的值
+                            var csrftoken = data[0]["value"];
+                            $.ajax(
+                                {
+                                    url: "/user/register/",
+                                    type: "post",
+                                    data: formData,
+                                    traditional: true, //是否深度序列化数据，true不深度
+                                    processData: false,//是否序列化字符串
+                                    contentType: false,//信息的类型
+                                    success: function (data) {
+                                        console.log(data)
+                                    },
+                                    beforeSend: function (xhr, settings) {
+                                        xhr.setRequestHeader("X-CSRFToken", csrftoken)
+                                    },
+                                    error: function (error) {
+                                        console.log(error)
+                                    }
+                                }
+                            )
                         }
                     }
                 )

@@ -15,10 +15,18 @@ Including another URLconf
 """
 from django.conf.urls import include, url
 from django.contrib import admin
-from XueGodCMDB.views import index
+from XueGodCMDB.views import *
 
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     url(r'^ckeditor/', include("ckeditor_uploader.urls")),
-    url(r'index/', index)
+    url(r'^user/', include("Users.urls")),
+    url(r'^api/', include("Api.urls")),
+    url(r'^server/', include("Service.urls")),
+    url(r'^$', index),
+    url(r'^index/', index),
+    url(r'^echart/', echart),
+    url(r'^login/', login),
+    url(r'^vue/', vueExample),
+    url(r'^gate/', gate)
 ]

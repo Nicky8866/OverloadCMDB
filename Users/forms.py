@@ -33,3 +33,18 @@ class CMDBUserForm(forms.Form):
             'required': "",
         }))
     photo = forms.ImageField(label='用户头像')
+
+def clean_phone(self):
+    #获取前端提交的值
+    phonedata = self.cleaned_data["phone"]
+    if len(phonedata) < 11:
+        raise forms.ValidationError("手机号不可以小于11位")
+    else:
+        return phonedata
+
+def clean_photo(self):
+    photodata = self.cleaned_data["photo"]
+    if photodata.zise > 20480:
+        raise forms.ValidationError("图片大小不能大于20KB")
+    else:
+        return photodata

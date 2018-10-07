@@ -1,0 +1,45 @@
+{% extends "blank.html" %}
+
+{% block title %}
+    Echart-Page
+{% endblock %}
+
+{% block style %}
+    <script src = "/static/js/echarts.min.js"></script>
+{% endblock %}
+
+{% block label %}
+    Echart-Page1
+{% endblock %}
+
+{% block content %}
+    <div id="panel" style="height: 500px; width: 500px;">
+
+    </div>
+    <script>
+        var myChart = echarts.init(document.getElementById("panel"));
+        options = {
+            title:{
+                text: "农药排名"
+            },
+            tooltip:{},
+            legend:{
+                data:["段位"]
+            },
+            xAxis:{
+                data:["空黑plus","吴彦祖","阿拉笨鸟","五月天","花村村长"]
+            },
+            yAxis:{
+                data:["黄金","铂金","钻石","星耀","王者"]
+            },
+            series:[
+                {
+                    name:"段位",
+                    type:"bar",
+                    data:["王者","黄金","钻石","星耀","铂金"]
+                }
+            ]
+        };
+        myChart.setOption(options)
+    </script>
+{% endblock %}

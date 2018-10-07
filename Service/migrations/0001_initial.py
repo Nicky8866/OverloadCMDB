@@ -14,28 +14,28 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Api',
             fields=[
-                ('id', models.AutoField(verbose_name='ID', serialize=False, primary_key=True, auto_created=True)),
-                ('name', models.CharField(verbose_name='接口名称', max_length=32)),
+                ('id', models.AutoField(serialize=False, auto_created=True, primary_key=True, verbose_name='ID')),
+                ('name', models.CharField(max_length=32, verbose_name='接口名称')),
                 ('description', ckeditor_uploader.fields.RichTextUploadingField(verbose_name='接口描述')),
-                ('doc', models.CharField(verbose_name='接口文档路径', max_length=64)),
+                ('doc', models.CharField(max_length=64, verbose_name='接口文档路径')),
             ],
         ),
         migrations.CreateModel(
             name='CMDBUser',
             fields=[
-                ('id', models.AutoField(verbose_name='ID', serialize=False, primary_key=True, auto_created=True)),
-                ('username', models.CharField(verbose_name='用户账号', max_length=32)),
-                ('password', models.CharField(verbose_name='用户密码', max_length=32)),
-                ('nickname', models.CharField(verbose_name='用户姓名', max_length=32)),
-                ('phone', models.CharField(verbose_name='用户手机号', max_length=11)),
-                ('email', models.EmailField(verbose_name='用户邮箱', max_length=254)),
-                ('photo', models.ImageField(verbose_name='用户头像', upload_to='images')),
+                ('id', models.AutoField(serialize=False, auto_created=True, primary_key=True, verbose_name='ID')),
+                ('username', models.CharField(max_length=32, verbose_name='用户账号')),
+                ('password', models.CharField(max_length=32, verbose_name='用户密码')),
+                ('nickname', models.CharField(max_length=32, verbose_name='用户姓名')),
+                ('phone', models.CharField(max_length=11, verbose_name='用户手机号')),
+                ('email', models.EmailField(max_length=254, verbose_name='用户邮箱')),
+                ('photo', models.ImageField(upload_to='images', verbose_name='用户头像')),
             ],
         ),
         migrations.CreateModel(
             name='Cpu',
             fields=[
-                ('id', models.AutoField(verbose_name='ID', serialize=False, primary_key=True, auto_created=True)),
+                ('id', models.AutoField(serialize=False, auto_created=True, primary_key=True, verbose_name='ID')),
                 ('processor', models.CharField(blank=True, max_length=32, null=True)),
                 ('vendor_id', models.CharField(blank=True, max_length=32, null=True)),
                 ('cpu_family', models.CharField(blank=True, max_length=32, null=True)),
@@ -66,7 +66,7 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Memory',
             fields=[
-                ('id', models.AutoField(verbose_name='ID', serialize=False, primary_key=True, auto_created=True)),
+                ('id', models.AutoField(serialize=False, auto_created=True, primary_key=True, verbose_name='ID')),
                 ('MemTota', models.CharField(blank=True, max_length=32, null=True)),
                 ('MemFree', models.CharField(blank=True, max_length=32, null=True)),
                 ('MemAvailable', models.CharField(blank=True, max_length=32, null=True)),
@@ -116,19 +116,19 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Service',
             fields=[
-                ('id', models.AutoField(verbose_name='ID', serialize=False, primary_key=True, auto_created=True)),
-                ('ip', models.CharField(verbose_name='服务器ip', max_length=32)),
-                ('mac', models.CharField(verbose_name='服务器物理地址', max_length=32)),
-                ('cpu', models.CharField(verbose_name='服务器CPU', max_length=32)),
-                ('memory', models.CharField(verbose_name='服务器内存', max_length=32)),
-                ('disk', models.CharField(verbose_name='服务器磁盘', max_length=32)),
-                ('isalive', models.CharField(verbose_name='服务器状态', max_length=32)),
+                ('id', models.AutoField(serialize=False, auto_created=True, primary_key=True, verbose_name='ID')),
+                ('hostname', models.CharField(max_length=32, verbose_name='服务器名称')),
+                ('ip', models.CharField(max_length=32, verbose_name='服务器ip')),
+                ('mac', models.CharField(max_length=32, verbose_name='服务器物理地址')),
+                ('cpu', models.CharField(max_length=32, verbose_name='服务器CPU')),
+                ('memory', models.CharField(max_length=32, verbose_name='服务器内存')),
+                ('isalive', models.CharField(max_length=32, verbose_name='服务器状态')),
             ],
         ),
         migrations.CreateModel(
             name='Service_Cpu',
             fields=[
-                ('id', models.AutoField(verbose_name='ID', serialize=False, primary_key=True, auto_created=True)),
+                ('id', models.AutoField(serialize=False, auto_created=True, primary_key=True, verbose_name='ID')),
                 ('service_id', models.IntegerField()),
                 ('cpu_id', models.IntegerField()),
             ],
@@ -136,7 +136,7 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Service_Memory',
             fields=[
-                ('id', models.AutoField(verbose_name='ID', serialize=False, primary_key=True, auto_created=True)),
+                ('id', models.AutoField(serialize=False, auto_created=True, primary_key=True, verbose_name='ID')),
                 ('service_id', models.IntegerField()),
                 ('memory_id', models.IntegerField()),
             ],
